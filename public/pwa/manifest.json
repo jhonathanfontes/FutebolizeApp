@@ -1,0 +1,23 @@
+{
+  "name": "Futebolize",
+  "short_name": "Futebolize",
+  "description": "Sistema gestor de futebol, peladas e campeonatos",
+  "start_url": "/?pwa=true",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "icons": [
+    {
+      "src": "/pwa/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/pwa/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
