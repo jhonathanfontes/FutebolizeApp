@@ -6,9 +6,9 @@ class HomeController extends BaseController
 {
     public function index(): string
     {
-        return $this->render('home/home.html.twig', [
+        return $this->render('site/home', [
             'title' => 'Welcome to Futebolize',
-            
+            'module' => 'site',            
         ]);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Controllers\Web;
 
-use App\Libraries\Twig\TwigFactory;
+use App\Libraries\Twig\TwigRenderer;
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
@@ -31,12 +31,12 @@ abstract class BaseController extends Controller
 
     public function __construct()
     {
-        $this->twig = TwigFactory::get();
+        $this->twig = new TwigRenderer();
     }
 
     public function  render(string $view, array $data = [], bool $print = true)
     {
-        return $this->twig->render($view, $data);
+        return $this->twig->render($view, $data, false);
     }
 
     /**
