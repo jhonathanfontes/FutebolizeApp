@@ -19,14 +19,21 @@ use CodeIgniter\Config\BaseService;
  */
 class Services extends BaseService
 {
-    /*
-     * public static function example($getShared = true)
-     * {
-     *     if ($getShared) {
-     *         return static::getSharedInstance('example');
-     *     }
-     *
-     *     return new \CodeIgniter\Example();
-     * }
-     */
+    public static function assetManager($getShared = true)
+    {
+        if ($getShared) {
+            return static::getSharedInstance('assetManager');
+        }
+
+        return new \App\Services\AssetManager();
+    }
+
+    public static function responseService(bool $getShared = true)
+    {
+        if ($getShared) {
+            return static::getSharedInstance('responseService');
+        }
+
+        return new \App\Services\ResponseService(service('response'));
+    }
 }
