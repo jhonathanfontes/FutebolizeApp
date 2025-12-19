@@ -6,6 +6,9 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 
+// Rota para servir arquivos privados de forma segura (ex: de writable/uploads).
+$routes->get('files/(:any)', 'FilesController::serve/$1');
+
 // Rota para servir assets de desenvolvimento de forma segura.
 // Esta rota só deve funcionar em ambiente de desenvolvimento,
 // conforme a lógica dentro do ResourcesController.

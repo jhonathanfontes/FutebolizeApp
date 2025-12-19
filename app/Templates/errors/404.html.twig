@@ -1,0 +1,25 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block content %}
+    <div class="container text-center">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h1 class="display-1 fw-bold">404</h1>
+                <p class="fs-3"> <span class="text-danger">Oops!</span> Página não encontrada.</p>
+                <p class="lead">
+                    {{ message }}
+                </p>
+                <a href="{{ base_url('/') }}" class="btn btn-primary">Voltar para a Home</a>
+            </div>
+        </div>
+        <style>
+            .container {
+                padding-top: 5rem;
+                padding-bottom: 5rem;
+            }
+            .display-1 {
+                font-size: 8rem;
+            }
+        </style>
+    </div>
+{% endblock %}

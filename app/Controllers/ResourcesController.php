@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Exceptions\ForbiddenException;
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\ResponseInterface;
 
@@ -34,9 +35,9 @@ class ResourcesController extends Controller
 
         // Verifica se o caminho é válido e se está dentro do diretório 'resources'
         if ($realPath === false || strpos($realPath, realpath(APPPATH . 'Resources')) !== 0) {
-            return $this->response->setStatusCode(403, 'Access denied. Path is outside the allowed directory.');
+             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
-        
+
         // 4. MEDIDA DE SEGURANÇA: Verificar se é um arquivo real
         if (!is_file($realPath)) {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
