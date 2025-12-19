@@ -19,16 +19,29 @@ class AssetManager
     public function globalCss(): string
     {
         if (ENVIRONMENT === 'development') {
-            $path = FCPATH . 'development/assets/css/';
+            $path = APPPATH . 'Resources/development/assets/css/';
             $urls = [];
 
             if (!is_dir($path)) {
                 return '';
             }
+            
+            $files = glob($path . '*.css');
+            sort($files);
 
-            foreach (glob($path . '*.css') as $css) {
-                $name = basename($css);
-                $urls[] = "<link rel=\"stylesheet\" href=\"{$this->base_url}/development/assets/css/{$name}?v=" . filemtime($css) . "\">";
+            $basePathToRemove = APPPATH . 'Resources/';
+
+            foreach ($files as $css) {
+                // Get the file path relative to app/Resources/
+                $relativeFilePath = str_ireplace($basePathToRemove, '', $css);
+                
+                // Normalize slashes for the URL
+                $urlPath = str_replace('\\', '/', $relativeFilePath);
+
+                // Build the final URL, mapping app/Resources to /resources
+                $finalUrl = "/resources/{$urlPath}";
+
+                $urls[] = "<link rel=\"stylesheet\" href=\"{$finalUrl}\">";
             }
 
             return implode("\n", $urls);
@@ -54,16 +67,29 @@ class AssetManager
     public function globalJs(): string
     {
         if (ENVIRONMENT === 'development') {
-            $path = FCPATH . 'development/assets/js/';
+            $path = APPPATH . 'Resources/development/assets/js/';
             $urls = [];
 
             if (!is_dir($path)) {
                 return '';
             }
 
-            foreach (glob($path . '*.js') as $js) {
-                $name = basename($js);
-                $urls[] = "<script src=\"{$this->base_url}/development/assets/js/{$name}?v=" . filemtime($js) . "\"></script>";
+            $files = glob($path . '*.js');
+            sort($files);
+
+            $basePathToRemove = APPPATH . 'Resources/';
+
+            foreach ($files as $js) {
+                // Get the file path relative to app/Resources/
+                $relativeFilePath = str_ireplace($basePathToRemove, '', $js);
+                
+                // Normalize slashes for the URL
+                $urlPath = str_replace('\\', '/', $relativeFilePath);
+
+                // Build the final URL, mapping app/Resources to /resources
+                $finalUrl = "/resources/{$urlPath}";
+
+                $urls[] = "<script src=\"{$finalUrl}\"></script>";
             }
 
             return implode("\n", $urls);

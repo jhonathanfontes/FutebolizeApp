@@ -6,6 +6,10 @@ use CodeIgniter\RESTful\ResourceController;
 
 class Errors extends ResourceController
 {
+     /**
+     * Handler global para erro 404
+     */
+
     public function notFound()
     {
         $request = service('request');

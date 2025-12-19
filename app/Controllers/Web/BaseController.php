@@ -28,14 +28,19 @@ abstract class BaseController extends Controller
 
     // protected $session;
     protected $twig;
+    protected $assetManager;
 
     public function __construct()
     {
         $this->twig = new TwigRenderer();
     }
 
-    public function  render(string $view, array $data = [], bool $print = true)
+    public function render(string $view, array $data = [], bool $print = true)
     {
+        // Add global assets to the data array
+        $data['global_css'] = $this->assetManager->globalCss();
+        $data['global_js']  = $this->assetManager->globalJs();
+
         return $this->twig->render($view, $data, false);
     }
 
@@ -52,6 +57,7 @@ abstract class BaseController extends Controller
         parent::initController($request, $response, $logger);
 
         // Preload any models, libraries, etc, here.
+        $this->assetManager = service('assetmanager');
         // $this->session = service('session');
     }
 }

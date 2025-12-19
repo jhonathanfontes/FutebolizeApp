@@ -1,13 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    {# CSS: Global do sistema #}
+    {{ global_css | raw }}
+
 </head>
+
 <body>
     <h1>Welcome to the Home Page</h1>
     <p>This is the home page of our website.</p>
     <button id="subscribe-button">Subscribe to Notifications</button>
 </body>
+
+<footer>
+    <p>&copy; 2024 My Company</p>
+</footer>
+
+{# JS: Global do sistema #}
+{{ global_js | raw }}
+
+<script>
+    window.addEventListener('DOMContentLoaded', event => {
+        const sidebarToggle = document.body.querySelector('#sidebarToggle');
+        if (sidebarToggle) {
+            sidebarToggle.addEventListener('click', event => {
+                event.preventDefault();
+                document.body.classList.toggle('sb-sidenav-toggled');
+                // Você pode querer salvar o estado no localStorage
+            });
+        }
+    });
+</script>
+{% block scripts %}{% endblock %}
+
 </html>

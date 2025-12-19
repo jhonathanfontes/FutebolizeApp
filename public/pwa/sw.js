@@ -2,8 +2,8 @@ const CACHE_NAME = 'futebolize-v1';
 
 const FILES_TO_CACHE = [
   '/',
-  '/css/app.css',
-  '/js/app.js',
+  'assets/css/app.min.css',
+  'assets/js/app.min.js',
   '/pwa/manifest.json'
 ];
 

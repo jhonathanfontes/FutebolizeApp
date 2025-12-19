@@ -10,7 +10,7 @@
 		{{ assets.inlineCss(module, company.slug ?? null) | raw }}
 
 		{# CSS: Global do sistema #}
-		{{ assets.globalCss() | raw }}
+		{{ global_css | raw }}
 
 		{# CSS: Específico do módulo (Dev/Prod) #}
 		{{ assets.devModuleCss(module) | raw }}
@@ -19,7 +19,7 @@
 		{# CSS: Tema da empresa (se aplicável) #}
 		{{ assets.themeCss(company.slug ?? null) | raw }}
 	</head>
-<body>
+<body class="dev-debug-marker">
     <div class="d-flex" id="wrapper">
         <!-- Sidebar-->
         <div class="border-end bg-white" id="sidebar-wrapper">
@@ -66,7 +66,7 @@
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 	{# JS: Global do sistema #}
-	{{ assets.globalJs() | raw }}
+	{{ global_js | raw }}
 
 	{# JS: Específico do módulo (Dev/Prod) #}
 	{{ assets.devModuleJs(module) | raw }}
