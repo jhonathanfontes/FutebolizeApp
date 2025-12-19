@@ -74,9 +74,13 @@
 
     <p>
         <?php if (ENVIRONMENT !== 'production') : ?>
-            <?= nl2br(esc($message)) ?>
+            <?php $safeMessage = is_array($message) || is_object($message) ? print_r($message, true) : (string) $message; ?>
+            <?php $safePath    = is_array($path)    || is_object($path)    ? print_r($path, true)    : (string) $path; ?>
+            <?= nl2br(esc((string) $safeMessage)) ?>
+            <br>
+            <?= nl2br(esc((string) $safePath)) ?>
         <?php else : ?>
-            <?= lang('Errors.sorryBadRequest') ?>
+            <?= lang('Errors.sorryCannotFind') ?>
         <?php endif; ?>
     </p>
 </div>

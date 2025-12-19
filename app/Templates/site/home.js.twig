@@ -1,1 +1,74 @@
-console.log('Passou por aqui');
+document.addEventListener('DOMContentLoaded', () => {
+    const subscribeButton = document.getElementById('subscribe-button');
+
+    if ('serviceWorker' in navigator && 'PushManager' in window) {
+        navigator.serviceWorker.register('/pwa/sw.js').then(swReg => {
+            console.log('Service Worker is registered', swReg);
+
+            subscribeButton.addEventListener('click', () => {
+                swReg.pushManager.getSubscription().then(subscription => {
+                    if (subscription === null) {
+                        // Not subscribed, so subscribe
+                        subscribeUser(swReg);
+                    } else {
+                        // Already subscribed
+                        console.log('User is already subscribed.');
+                    }
+                });
+            });
+        }).catch(error => {
+            console.error('Service Worker Error', error);
+        });
+    } else {
+        console.warn('Push messaging is not supported');
+        subscribeButton.textContent = 'Push Not Supported';
+    }
+});
+
+function subscribeUser(swReg) {
+    const applicationServerKey = urlB64ToUint8Array('{{ VAPID_PUBLIC_KEY }}');
+    swReg.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: applicationServerKey
+    }).then(subscription => {
+        console.log('User is subscribed:', subscription);
+        sendSubscriptionToServer(subscription);
+    }).catch(err => {
+        console.log('Failed to subscribe the user: ', err);
+    });
+}
+
+function sendSubscriptionToServer(subscription) {
+    fetch('/push/subscribe', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(subscription)
+    }).then(response => {
+        if (!response.ok) {
+            throw new Error('Bad status code from server.');
+        }
+        return response.json();
+    }).then(responseData => {
+        if (!(responseData.success)) {
+            throw new Error('Bad response from server.');
+        }
+    });
+}
+
+// This function is needed because the VAPID public key is base64 encoded
+function urlB64ToUint8Array(base64String) {
+    const padding = '='.repeat((4 - base64String.length % 4) % 4);
+    const base64 = (base64String + padding)
+        .replace(/\-/g, '+')
+        .replace(/_/g, '/');
+
+    const rawData = window.atob(base64);
+    const outputArray = new Uint8Array(rawData.length);
+
+    for (let i = 0; i < rawData.length; ++i) {
+        outputArray[i] = rawData.charCodeAt(i);
+    }
+    return outputArray;
+}

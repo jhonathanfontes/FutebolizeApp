@@ -27,7 +27,7 @@ class Errors extends ResourceController
             [
                 'status'  => 404,
                 'error'   => 'NOT_FOUND',
-                'message' => 'Rota da API não encontrada',
+                'message' => 'Pagina não encontrada!',
                 'path'    => $request->getPath(),
                 'method'  => $request->getMethod(),
             ]
