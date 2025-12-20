@@ -15,6 +15,11 @@ $routes->get('files/(:any)', 'FilesController::serve/$1');
 $routes->get('resources/(:any)', 'ResourcesController::serve/$1');
 
 
+$routes->get('/login', 'Web\UsuarioController::login');
+$routes->get('/logout', 'Web\UsuarioController::logout');
+$routes->get('/criar-conta', 'Web\UsuarioController::criarConta');
+
+
 $routes->get('/', 'Home::index');
 $routes->get('/home/teste', 'Web\HomeController::index');
 

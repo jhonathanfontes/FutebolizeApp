@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acesso ao Sistema</title>
+    <link rel="stylesheet" href="assets/css/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="main-container">
+        <div class="login-card" id="loginCard">
+            <h2 class="title">Entrar</h2>
+            <p class="subtitle">Bem-vindo de volta! Digite seus dados.</p>
+            
+            <form class="auth-form">
+                <div class="input-group">
+                    <i class="fa-regular fa-envelope"></i>
+                    <input type="email" placeholder="E-mail" required>
+                </div>
+                <div class="input-group">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" placeholder="Senha" required>
+                </div>
+                <a href="#" class="forgot-pass">Esqueceu a senha?</a>
+                <button type="submit" class="btn-main">Entrar</button>
+            </form>
+
+            <div class="divider"><span>ou entre com</span></div>
+
+            <div class="social-auth">
+                <button class="social-btn"><i class="fa-brands fa-google"></i></button>
+                {# <button class="social-btn"><i class="fa-brands fa-facebook-f"></i></button> #}
+            </div>
+
+            <p class="footer-text">Não tem uma conta? <a href="#" id="toRegister">Cadastre-se</a></p>
+        </div>
+
+        <div class="login-card hidden" id="registerCard">
+            <h2 class="title">Criar Conta</h2>
+            <p class="subtitle">Junte-se a nós e comece sua jornada.</p>
+            
+            <form class="auth-form">
+                <div class="input-group">
+                    <i class="fa-regular fa-user"></i>
+                    <input type="text" placeholder="Nome Completo" required>
+                </div>
+                <div class="input-group">
+                    <i class="fa-regular fa-envelope"></i>
+                    <input type="email" placeholder="E-mail" required>
+                </div>
+                <div class="input-group">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" placeholder="Senha" required>
+                </div>
+                <button type="submit" class="btn-main">Cadastrar</button>
+            </form>
+
+            <p class="footer-text">Já possui conta? <a href="#" id="toLogin">Fazer Login</a></p>
+        </div>
+    </div>
+    <script src="assets/js/login.js"></script>
+</body>
+</html>

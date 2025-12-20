@@ -29,7 +29,8 @@
             "Config\\": "app/Config/"
         },
         "exclude-from-classmap": [
-            "**/Database/Migrations/**"
+            "**/Database/Migrations/**",
+            "app/Database/Migrations/*"
         ]
     },
     "autoload-dev": {

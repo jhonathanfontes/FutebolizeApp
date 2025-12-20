@@ -18,3 +18,8 @@ $routes->group('api', static function ($routes) {
 $routes->group('app', static function ($routes) {
     require APPPATH . 'Routes/app.php';
 });
+
+// Carregar rotas adicionais, se existirem
+if (is_file(APPPATH . 'Routes/' . ENVIRONMENT . '/Routes.php')) {
+    require APPPATH . 'Routes/' . ENVIRONMENT . '/Routes.php';
+}
